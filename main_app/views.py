@@ -18,7 +18,15 @@ class MerchList(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["merch"] = Merch.objects.all() # Here we are using the model to query the database for us.
+        # to get the query parameter we have to acccess it in the request.GET dictionary object        
+        name = self.request.GET.get("name")
+        # If a query exists we will filter by name 
+        if name != None:
+            # .filter is the sql WHERE statement and name__icontains is doing a search for any name that contains the query param
+            context["merch"] = Merch.objects.filter(name__icontains=name)
+            context["header"] = f"Results for '{name}'"
+        else:
+            context["merch"] = Merch.objects.all()
         return context
 
 
