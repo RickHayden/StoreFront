@@ -3,6 +3,8 @@ from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .models import Merch
+from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 
 # Create your views here.
 
@@ -35,4 +37,13 @@ class ContactUs(TemplateView):
 
 
 
-    
+class MerchCreate(CreateView):
+    model = Merch
+    fields = ['name', 'img', 'bio']
+    template_name = "merch_create.html"
+    success_url = "/merch/"
+
+
+class MerchDetail(DetailView):
+    model = Merch
+    template_name = "merch_detail.html"
