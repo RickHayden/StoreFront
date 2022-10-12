@@ -3,7 +3,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .models import Merch
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
 
@@ -58,3 +58,9 @@ class MerchUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('merch_detail', kwargs={'pk': self.object.pk})
+
+
+class MerchDelete(DeleteView):
+    model = Merch
+    template_name = "merch_delete_confirm.html"
+    success_url = "/merch/"

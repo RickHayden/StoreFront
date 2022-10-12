@@ -9,5 +9,6 @@ urlpatterns = [
     path('contactus/', views.ContactUs.as_view(), name = 'contact_us'),
     path('merch/new/', views.MerchCreate.as_view(), name = "merch_create"),
     path('merch/<int:pk>/', views.MerchDetail.as_view(), name = "merch_detail"),
-    path('merch/<int:pk>/update', views.MerchUpdate.as_view(), name = "merch_update")
+    path('merch/<int:pk>/update', views.MerchUpdate.as_view(), name = "merch_update"),
+    path('merch/<int:pk>/delete', views.MerchDelete.as_view(), name = "merch_delete")
 ]
