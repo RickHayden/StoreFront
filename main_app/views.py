@@ -3,8 +3,9 @@ from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .models import Merch
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DetailView
+from django.urls import reverse
 
 # Create your views here.
 
@@ -41,9 +42,19 @@ class MerchCreate(CreateView):
     model = Merch
     fields = ['name', 'img', 'bio']
     template_name = "merch_create.html"
-    success_url = "/merch/"
+    def get_success_url(self):
+        return reverse('merch_detail', kwargs={'pk': self.object.pk})
 
 
 class MerchDetail(DetailView):
     model = Merch
     template_name = "merch_detail.html"
+
+
+class MerchUpdate(UpdateView):
+    model = Merch
+    fields = ['name', 'img', 'bio']
+    template_name = "merch_update.html"
+
+    def get_success_url(self):
+        return reverse('merch_detail', kwargs={'pk': self.object.pk})

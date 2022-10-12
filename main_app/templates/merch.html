@@ -1,12 +1,12 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1 class="title">StoreFront Merchandise</h1>
-<h1 class="title pt-5">{{header}}</h1>
+<!-- <h1 class="title">StoreFront Merchandise</h1> -->
+<h1 class="title pt-5">StoreFront {{header}}</h1>
 <form class="mb-5" method="get">
   <div class="field has-addons">
     <div class="control">
       <!--  Our input will search by name of merch  -->
-      <input class="input" type="text" name="name" placeholder="name" />
+      <input class="input" type="text" name="name" placeholder="Search..." />
     </div>
     <div class="control">
       <input class="button is-success" type="submit" value="Search" />
