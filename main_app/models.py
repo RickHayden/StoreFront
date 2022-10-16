@@ -31,6 +31,14 @@ class Review(models.Model):
 
 
 
+class Wishlist(models.Model):
+
+    title = models.CharField(max_length = 150, default = "Wishlist")
+    content = models.ManyToManyField(Merch)
+
+    def __str__(self):
+        return self.title
+
 
 
 
