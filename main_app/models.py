@@ -25,9 +25,15 @@ class Review(models.Model):
 
     content = models.CharField(max_length=250)
     rating = models.IntegerField(default=0)
+    created = models.DateTimeField(auto_now_add=True)
+    # modified = models.DateTimeField()
     merch = models.ForeignKey(Merch, on_delete=models.CASCADE, related_name="reviews")
 
-
+    # def save(self, *args, **kwargs):
+    #     if not self.id:
+    #         self.created = time.now()
+    #     self.modified = time.now()
+    #     return super(Review, self).save(*args, **kwargs)
     def __str__(self):
         return self.content
 

@@ -81,8 +81,9 @@ class ReviewCreate(View):
     def post(self, request, pk):
         content = request.POST.get("content")
         rating = request.POST.get("rating")
+        created = request.POST.get("created")
         merch = Merch.objects.get(pk=pk)
-        Review.objects.create(content=content, rating=rating, merch=merch)
+        Review.objects.create(content=content, rating=rating, merch=merch, created=created)
         return redirect('merch_detail', pk=pk)
 
 
