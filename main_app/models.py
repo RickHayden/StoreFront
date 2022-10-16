@@ -1,6 +1,7 @@
 from sys import maxsize
 from unittest.util import _MAX_LENGTH
 from django.db import models
+import time
 # from accounts.models import Account
 
 # Create your models here.
@@ -26,6 +27,7 @@ class Review(models.Model):
     rating = models.IntegerField(default=0)
     merch = models.ForeignKey(Merch, on_delete=models.CASCADE, related_name="reviews")
 
+
     def __str__(self):
         return self.content
 
@@ -34,7 +36,7 @@ class Review(models.Model):
 class Wishlist(models.Model):
 
     title = models.CharField(max_length = 150, default = "Wishlist")
-    content = models.ManyToManyField(Merch)
+    merchs = models.ManyToManyField(Merch)
 
     def __str__(self):
         return self.title

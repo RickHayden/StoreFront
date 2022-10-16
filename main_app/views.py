@@ -54,6 +54,11 @@ class MerchDetail(DetailView):
     model = Merch
     template_name = "merch_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["wishlists"] = Wishlist.objects.all()
+        return context
+
 
 class MerchUpdate(UpdateView):
     model = Merch
@@ -79,3 +84,21 @@ class ReviewCreate(View):
         merch = Merch.objects.get(pk=pk)
         Review.objects.create(content=content, rating=rating, merch=merch)
         return redirect('merch_detail', pk=pk)
+
+
+
+
+class WishlistMerchAssoc(View):
+
+    def get(self, request, pk, merch_pk):
+        # get the query param from the url
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            # get the wishlist by the id and
+            # remove from the join table the given merch_id
+            Wishlist.objects.get(pk=pk).merchs.remove(merch_pk)
+        if assoc == "add":
+            # get the wishlist by the id and
+            # add to the join table the given merch_id
+            Wishlist.objects.get(pk=pk).merchs.add(merch_pk)
+        return redirect('home')

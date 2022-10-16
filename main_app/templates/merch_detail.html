@@ -5,6 +5,38 @@
 </div>
 <div class="detail__name">
     <h1 class="title">{{merch.name}}</h1>
+    <span>
+        <div class="dropdown">
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu"
+            >
+              <span>Add to Wishlist</span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              {% for wishlist in wishlists %}
+          <!-- each playlist becomes a drop
+          down item with the ids needed to add to the join table  -->
+              <a
+                href="{% url 'wishlist_merch_assoc' wishlist.pk merch.pk %}?assoc=add"
+                class="dropdown-item"
+              >
+                {{wishlist.title}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </span>
+
+
 </div>
 <div class="detail__container">
     <!-- inside container -->
@@ -16,6 +48,7 @@
                 <span>{{forloop.counter}}</span>
                 <span><b>{{review.content}}</b></span>
                 <span>{{review.rating}}/10</span>
+                <span>{{review.created_at}}</span>
             </div>
         {% empty %}
             <article class="message">
