@@ -7,6 +7,54 @@
     <h1 class="title">{{merch.name}}</h1>
 </div>
 <div class="detail__container">
+    <!-- inside container -->
+    <div class="detail__reviews mb-5">
+        <h3 class="title is-4">Reviews</h3>
+
+        {% for review in merch.reviews.all %}
+            <div class="review">
+                <span>{{forloop.counter}}</span>
+                <span><b>{{review.content}}</b></span>
+                <span>{{review.rating}}/10</span>
+            </div>
+        {% empty %}
+            <article class="message">
+                <div class="message-header">
+                    <p>No Reviews Available</p>
+                </div>
+            </article>
+
+        {% endfor %}
+    </div>
+<!--  above about section  -->
+<form class="mb-5" action="{% url 'review_create' merch.pk %}" method="post">
+    {% csrf_token %}
+    <div class="field has-addons">
+        <div class="control">
+            <input
+                class="input"
+                type="text"
+                name="content"
+                placeholder="Review..."
+                required
+            />
+        </div>
+        <div class="control">
+            <input
+                class="input"
+                type="number"
+                name="rating"
+                placeholder="-/10"
+                min = "1"
+                max = "10"
+                required
+            />
+        </div>
+        <div class="control">
+            <input class="button is-primary" type="submit" value="Add Review" />
+        </div>
+    </div>
+</form>
     <div class="buttons">
         <a href="{% url 'merch_update' merch.pk %}" class="button is-info">
             <span class="icon">

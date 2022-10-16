@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
-from .models import Merch
+from .models import Merch, Review
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
@@ -64,3 +64,14 @@ class MerchDelete(DeleteView):
     model = Merch
     template_name = "merch_delete_confirm.html"
     success_url = "/merch/"
+
+
+
+class ReviewCreate(View):
+
+    def post(self, request, pk):
+        content = request.POST.get("content")
+        rating = request.POST.get("rating")
+        merch = Merch.objects.get(pk=pk)
+        Review.objects.create(content=content, rating=rating, merch=merch)
+        return redirect('merch_detail', pk=pk)

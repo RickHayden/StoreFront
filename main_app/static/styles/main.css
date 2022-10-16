@@ -8,3 +8,22 @@
 .gallery .card {
     transition: .1s linear;
 }
+
+.review {
+    width: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 0.1fr 3fr 1fr;
+    border-radius: 5px;
+}
+
+.detail__reviews {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.review:hover {
+    background-color: hsla(0, 0%, 100%, 0.1);
+    cursor: pointer;
+}
