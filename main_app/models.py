@@ -3,9 +3,8 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 import time
 from django.contrib.auth.models import User
-# from accounts.models import Account
 
-# Create your models here.
+
 
 class Merch(models.Model):
 
@@ -29,15 +28,10 @@ class Review(models.Model):
     content = models.CharField(max_length=250)
     rating = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
-    # modified = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     merch = models.ForeignKey(Merch, on_delete=models.CASCADE, related_name="reviews")
 
-    # def save(self, *args, **kwargs):
-    #     if not self.id:
-    #         self.created = time.now()
-    #     self.modified = time.now()
-    #     return super(Review, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.content
 
@@ -56,18 +50,3 @@ class Wishlist(models.Model):
 
 
 
-
-
-# class ReviewRating(models.Model):
-#     merch = models.ForeignKey(Merch, on_delete = models.CASCADE)
-#     user = models.ForeignKey(Account, on_delete = models.CASCADE)
-#     subject = models.CharField(max_length = 200, blank = True)
-#     review = models.TextField(max_length = 500, blank = True)
-#     rating = models.FloatField()
-#     ip = models.CharField(max_length = 20, blank = True)
-#     status = models.BooleanField(default = True)
-#     created_date = models.DateTimeField(auto_now_add = True)
-#     updated_at = models.DateTimeField(auto_now = True)
-
-#     def __str__(self):
-#         return self.subject
