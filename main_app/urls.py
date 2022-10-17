@@ -12,5 +12,6 @@ urlpatterns = [
     path('merch/<int:pk>/update', views.MerchUpdate.as_view(), name = "merch_update"),
     path('merch/<int:pk>/delete', views.MerchDelete.as_view(), name = "merch_delete"),
     path('merch/<int:pk>/reviews/new/', views.ReviewCreate.as_view(), name = "review_create"),
-    path('wishlists/<int:pk>/merchs/<int:merch_pk>/', views.WishlistMerchAssoc.as_view(), name= "wishlist_merch_assoc")
+    path('wishlists/<int:pk>/merchs/<int:merch_pk>/', views.WishlistMerchAssoc.as_view(), name= "wishlist_merch_assoc"),
+    path('accounts/signup/', views.Signup.as_view(), name = "signup")
 ]

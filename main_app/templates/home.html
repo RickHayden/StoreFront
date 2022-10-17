@@ -4,21 +4,22 @@
 <h1>Welcome to our store! Here you will find all sorts of clothing, accessories, and exclusive merch.</h1>
 <ul>
     <li>When you find something you like, feel free to add it to your wishlist!</li>
-    <li>Wishlists show up on this home page once created. Now you can remember the items you wanted each time you enter the site.</li>
+    <li>Wishlists show up on the home page once created. Now you can quickly see the items you want each time you enter the site.</li>
 </ul>
 <div class="home__playlists">
     {% for wishlist in wishlists %}
 
         <div class="playlist mb-5">
+            
             <h3 class="title is-3 has-text-success">{{wishlist.title}}</h3>
             <hr />
 
             {% for merch in wishlist.merchs.all %}
-
+                {% if user.is_authenticated %}
                 <div class="review">
                     <span>{{forloop.counter}}</span>
-                    <span><b>{{merch.title}}</b></span>
-                    <span>{{merch}}</span>
+                    <span><b>{{merch}}</b></span>
+                    <span>{{merch.bio}}</span>
                     <span>
                         <a href="{% url 'wishlist_merch_assoc' wishlist.pk merch.pk %}?assoc=remove" class="button is-danger is-outlined">
                             <span class="icon is-small">
@@ -29,11 +30,15 @@
                     </div>
                     </span>
                 </div>
-
+                {% else %}
+                <h1></h1>
+                {% endif %}
             {% endfor %}
         </div>
     {% empty %} 
-        <div class="playlist mb-5">"There is no merchandise in this wishlist."</div>
+        <div class="playlist mb-5">
+            <p>"There is no merchandise in this wishlist."</p>
+        </div>
     {% endfor %}
 </div>
 {% endblock %}

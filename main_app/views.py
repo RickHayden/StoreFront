@@ -1,3 +1,7 @@
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
@@ -6,6 +10,7 @@ from .models import Merch, Review, Wishlist
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
+
 
 # Create your views here.
 
@@ -88,7 +93,7 @@ class ReviewCreate(View):
 
 
 
-
+@method_decorator(login_required, name='dispatch')
 class WishlistMerchAssoc(View):
 
     def get(self, request, pk, merch_pk):
@@ -103,3 +108,23 @@ class WishlistMerchAssoc(View):
             # add to the join table the given merch_id
             Wishlist.objects.get(pk=pk).merchs.add(merch_pk)
         return redirect('home')
+
+
+
+
+class Signup(View):
+    # show a form to fill out
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "registration/signup.html", context)
+    # on form submit, validate the form and login the user.
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("merch")
+        else:
+            context = {"form": form}
+            return render(request, "registration/signup.html", context)

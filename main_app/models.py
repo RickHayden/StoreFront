@@ -2,6 +2,7 @@ from sys import maxsize
 from unittest.util import _MAX_LENGTH
 from django.db import models
 import time
+from django.contrib.auth.models import User
 # from accounts.models import Account
 
 # Create your models here.
@@ -12,7 +13,8 @@ class Merch(models.Model):
     img = models.CharField(max_length=450)
     bio = models.TextField(max_length=800)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
     def __str__(self):
         return self.name
 
@@ -27,6 +29,7 @@ class Review(models.Model):
     rating = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     # modified = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     merch = models.ForeignKey(Merch, on_delete=models.CASCADE, related_name="reviews")
 
     # def save(self, *args, **kwargs):
