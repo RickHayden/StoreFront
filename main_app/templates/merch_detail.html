@@ -5,6 +5,7 @@
 </div>
 <div class="detail__name">
     <h1 class="title">{{merch.name}}</h1>
+    <h1 class ="title is-4">${{merch.price}}</h1>
     <span>
         <div class="dropdown">
           <div class="dropdown-trigger">
@@ -46,7 +47,7 @@
         {% for review in merch.reviews.all %}
             <div class="review">
                 <span>{{forloop.counter}}</span>
-                <span><b>"{{review.user}}" says: {{review.content}}</b></span>
+                <span><b>"{{review.user}}"</b> says: {{review.content}}</b></span>
                 <span>{{review.rating}}/5</span>
                 <span>{{review.created}}</span>
                 <!-- <span>{{review.modified}}</span> -->

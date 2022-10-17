@@ -29,10 +29,10 @@
 }
 
 img {
-    width: 100%;
+    width: 30%;
     height: 500px;
     object-fit: cover;
-    object-position: top;
+    object-position: top;   
 }
 
 .review {
@@ -44,3 +44,11 @@ img {
     border-radius: 5px;
 }
   
+#ratings {
+    float: right;
+}
+
+#date {
+    float: left;
+    right: 80px;
+}

@@ -23,7 +23,7 @@ class Home(TemplateView):
         return context
 
 
-
+@method_decorator(login_required, name='dispatch')
 class MerchList(TemplateView):
     template_name = 'merch.html'
 
@@ -49,7 +49,7 @@ class ContactUs(TemplateView):
 
 class MerchCreate(CreateView):
     model = Merch
-    fields = ['name', 'img', 'bio']
+    fields = ['name', 'img', 'bio', 'price']
     template_name = "merch_create.html"
     def get_success_url(self):
         return reverse('merch_detail', kwargs={'pk': self.object.pk})
@@ -67,7 +67,7 @@ class MerchDetail(DetailView):
 
 class MerchUpdate(UpdateView):
     model = Merch
-    fields = ['name', 'img', 'bio']
+    fields = ['name', 'img', 'bio', 'price']
     template_name = "merch_update.html"
 
     def get_success_url(self):
@@ -88,12 +88,12 @@ class ReviewCreate(View):
         rating = request.POST.get("rating")
         created = request.POST.get("created")
         merch = Merch.objects.get(pk=pk)
-        Review.objects.create(content=content, rating=rating, merch=merch, created=created)
+        user = request.user
+        Review.objects.create(content=content, rating=rating, merch=merch, created=created, user=user)
         return redirect('merch_detail', pk=pk)
 
 
 
-@method_decorator(login_required, name='dispatch')
 class WishlistMerchAssoc(View):
 
     def get(self, request, pk, merch_pk):

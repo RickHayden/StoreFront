@@ -12,6 +12,7 @@ class Merch(models.Model):
     name = models.CharField(max_length=300)
     img = models.CharField(max_length=450)
     bio = models.TextField(max_length=800)
+    price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 

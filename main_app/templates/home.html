@@ -18,8 +18,10 @@
                 {% if user.is_authenticated %}
                 <div class="review">
                     <span>{{forloop.counter}}</span>
-                    <span><b>{{merch}}</b></span>
-                    <span>{{merch.bio}}</span>
+                    <a href="{% url 'merch_detail' merch.pk %}" class="button is-not-outlined">{{merch}}</a>
+                    <!-- <span><b>{{merch}}</b></span> -->
+                    <span><img src="{{merch.img}}" alt="{{merch.name}}"/></span>
+                    <!-- <span>${{merch.price}}</span> -->
                     <span>
                         <a href="{% url 'wishlist_merch_assoc' wishlist.pk merch.pk %}?assoc=remove" class="button is-danger is-outlined">
                             <span class="icon is-small">
