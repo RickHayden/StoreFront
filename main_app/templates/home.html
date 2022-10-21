@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1 class="title pt-5">StoreFront - Home</h1>
-<h1>Welcome to our store! Here you will find all sorts of clothing, accessories, and exclusive merch.</h1>
+<h1>Welcome to our store! Please log in to view merchandise. Here you will find all sorts of clothing, accessories, and exclusive merch.</h1>
 <ul>
     <li>When you find something you like, feel free to add it to your wishlist!</li>
     <li>Wishlists show up on the home page once created. Now you can quickly see the items you've saved each time you enter the site.</li>
@@ -18,7 +18,7 @@
                 {% if user.is_authenticated %}
                 <div class="review">
                     <span>{{forloop.counter}}</span>
-                    <a href="{% url 'merch_detail' merch.pk %}" class="button is-not-outlined">{{merch}} (${{merch.price}})</a>
+                    <a href="{% url 'merch_detail' merch.pk %}" class="button is-outlined">{{merch}} (${{merch.price}})</a>
                     <span><img src="{{merch.img}}" alt="{{merch.name}}"/></span>
                     <span>
                         <a href="{% url 'wishlist_merch_assoc' wishlist.pk merch.pk %}?assoc=remove" class="button is-danger is-outlined">
